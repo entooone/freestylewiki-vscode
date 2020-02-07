@@ -5,15 +5,16 @@
     "author": {
         "name": "entooone"
     },
+    "publisher": "entooone",
     "license": "SEE LICENSE IN LICENSE.txt",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "icon": "images/icon.png",
     "engines": {
-        "vscode": "^1.38.0"
+        "vscode": "^1.41.0"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/entooone/freestylewiki-extension.git"
+        "url": "https://github.com/entooone/freestylewiki-vscode"
     },
     "categories": [
         "Programming Languages"

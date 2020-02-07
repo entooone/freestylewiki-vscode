@@ -2,6 +2,14 @@
 
 [FreeStyleWiki](https://fswiki.osdn.jp/cgi-bin/wiki.cgi) 用の VSCode 拡張機能。
 
+## インストール
+
+https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-extension
+
+```
+ext install entooone.freestylewiki-extension
+```
+
 ## 機能
 
 - シンタックスハイライトの追加
