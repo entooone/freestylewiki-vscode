@@ -1,0 +1,85 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "FreeStyleWiki",
+	"patterns": [
+		{
+			"include": "#heading"
+		},
+		{
+			"include": "#quote"
+		},
+		{
+			"include": "#list"
+		},
+		{
+			"include": "#code-begin"
+		},
+		{
+			"include": "#code-end"
+		},
+		{
+			"include": "#inline"
+		}
+	],
+	"repository": {
+		"heading": {
+			"name": "markup.heading.fsw",
+			"match": "(?:^|\\G)!{1,3}.+$"
+		},
+		"quote": {
+			"name": "markup.quote.fsw",
+			"match": "(?:^|\\G)\"{2}.+$"
+		},
+		"list": {
+			"name": "markup.list.fsw",
+			"match": "(?:^|\\G)[\\*\\+]{1,3}[^\\*\\+].+$"
+		},
+		"code-begin": {
+			"name": "markup.quote.fsw",
+			"match": "(?:^|\\G)[{]{2}pre$"
+		},
+		"code-end": {
+			"name": "markup.quote.fsw",
+			"match": "(?:^|\\G)[}]{2}$"
+		},
+		"bold2": {
+			"name": "markup.quote.fsw",
+			"match": "Ganeti"
+		},
+		"inline": {
+			"patterns": [
+				{
+					"include": "#bold"
+				},
+				{
+					"include": "#italic"
+				},
+				{
+					"include": "#strike"
+				},
+				{
+					"include": "#underline"
+				}
+			],
+			"repository": {
+				"bold": {
+					"name": "markup.bold.fsw",
+					"match": "'''[^']+'''"
+				},
+				"italic": {
+					"name": "markup.italic.fsw",
+					"match": "''[^']+''"
+				},
+				"strike": {
+					"name": "markup.bold.strike.fsw",
+					"match": "==[^=]+=="
+				},
+				"underline": {
+					"name": "markup.underline.fsw",
+					"match": "__[^_]+__"
+				}
+			}
+		}
+	},
+	"scopeName": "source.fsw"
+}

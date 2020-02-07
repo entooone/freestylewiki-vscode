@@ -1,0 +1,58 @@
+{
+    "name": "freestylewiki-extension",
+    "displayName": "FreeStyleWiki for Visual Studio Code",
+    "description": "FreeStyleWiki support for Vistual Studio Code",
+    "author": {
+        "name": "entooone"
+    },
+    "license": "SEE LICENSE IN LICENSE.txt",
+    "version": "0.1.0",
+    "icon": "images/icon.png",
+    "engines": {
+        "vscode": "^1.38.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/entooone/freestylewiki-extension.git"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "fsw",
+                "aliases": [
+                    "FreeStyleWiki",
+                    "fsw"
+                ],
+                "extensions": [
+                    ".fsw"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "fsw",
+                "scopeName": "source.fsw",
+                "path": "./syntaxes/fsw.tmLanguage.json"
+            }
+        ]
+    },
+    "activationEvents": [
+        "onLanguage:fsw"
+    ],
+    "main": "./src/extension.js",
+    "devDependencies": {
+        "@types/glob": "^7.1.1",
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^10.12.21",
+        "@types/vscode": "^1.41.0",
+        "eslint": "^5.13.0",
+        "glob": "^7.1.4",
+        "mocha": "^6.1.4",
+        "typescript": "^3.3.1",
+        "vscode-test": "^1.2.0"
+    }
+}
