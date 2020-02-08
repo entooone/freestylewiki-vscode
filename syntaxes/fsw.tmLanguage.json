@@ -42,10 +42,6 @@
 			"name": "markup.quote.fsw",
 			"match": "(?:^|\\G)[}]{2}$"
 		},
-		"bold2": {
-			"name": "markup.quote.fsw",
-			"match": "Ganeti"
-		},
 		"inline": {
 			"patterns": [
 				{
