@@ -25,10 +25,12 @@
                 "id": "fsw",
                 "aliases": [
                     "FreeStyleWiki",
-                    "fsw"
+                    "fsw",
+                    "fswiki"
                 ],
                 "extensions": [
-                    ".fsw"
+                    ".fsw",
+                    ".fswiki"
                 ],
                 "configuration": "./language-configuration.json"
             }
