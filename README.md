@@ -10,6 +10,11 @@ https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-exten
 ext install entooone.freestylewiki-extension
 ```
 
+## サポートする拡張子
+
+- `*.fsw`
+- `*.fswiki`
+
 ## 機能
 
 - シンタックスハイライトの追加
