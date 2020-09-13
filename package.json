@@ -6,7 +6,7 @@
         "name": "entooone"
     },
     "publisher": "entooone",
-    "license": "SEE LICENSE IN LICENSE.txt",
+    "license": "SEE LICENSE IN LICENSE",
     "version": "0.2.0",
     "icon": "images/icon.png",
     "engines": {
@@ -48,14 +48,14 @@
     ],
     "main": "./src/extension.js",
     "devDependencies": {
-        "@types/glob": "^7.1.1",
+        "@types/glob": "^7.1.3",
         "@types/mocha": "^5.2.6",
-        "@types/node": "^10.12.21",
-        "@types/vscode": "^1.41.0",
+        "@types/node": "^10.17.32",
+        "@types/vscode": "^1.49.0",
         "eslint": "^5.13.0",
         "glob": "^7.1.4",
-        "mocha": "^6.1.4",
-        "typescript": "^3.3.1",
-        "vscode-test": "^1.2.0"
+        "mocha": "^6.2.3",
+        "typescript": "^3.9.7",
+        "vscode-test": "^1.4.0"
     }
 }
