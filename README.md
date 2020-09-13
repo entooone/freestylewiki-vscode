@@ -6,10 +6,6 @@
 
 https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-extension
 
-```
-ext install entooone.freestylewiki-extension
-```
-
 ## サポートする拡張子
 
 - `*.fsw`
@@ -22,4 +18,4 @@ ext install entooone.freestylewiki-extension
 
 ## 参考
 
-- [FreeStyleWiki 入門2](http://sumidagawa-shimizu.com/jugyo/wiki/wiki.cgi/teacher/GuideFSW?page=FreeStyleWiki+%C6%FE%CC%E72#p4)
+- [FreeStyleWiki 入門2](http://sumidagawa-shimizu.com/jugyo/wiki/wiki.cgi/teacher/GuideFSW?page=FreeStyleWiki+%C6%FE%CC%E72)
