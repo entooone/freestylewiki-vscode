@@ -1,0 +1,41 @@
+name: release
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  release:
+    runs-on: ubuntu-18.04
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - 
+        run: npm install
+      - 
+        name: Create .vsce Package
+        run: npx vsce package -o freestylewiki-extension.vsix
+      - 
+        name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+      -
+        name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./freestylewiki-extension.vsix
+          asset_name: freestylewiki-extension.vsix
+          asset_content_type: application/vsix
