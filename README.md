@@ -2,6 +2,7 @@
 
 [![release](https://img.shields.io/github/workflow/status/entooone/freestylewiki-vscode/release?label=release&logo=github)](https://github.com/entooone/freestylewiki-vscode/actions?query=workflow%3Arelease)
 [![version](https://img.shields.io/vscode-marketplace/v/entooone.freestylewiki-extension.svg?style=flat&logo=visual%20studio%20code&label=vscode%20marketplace)](https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-extension)
+[![devDependencies](https://img.shields.io/david/dev/entooone/freestylewiki-vscode?label=devDependencies&logo=node.js&logoColor=white)](https://david-dm.org/entooone/freestylewiki-vscode?type=dev)
 [![installs](https://img.shields.io/vscode-marketplace/i/entooone.freestylewiki-extension.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-extension)
 
 [FreeStyleWiki](https://fswiki.osdn.jp/cgi-bin/wiki.cgi) 用の VSCode 拡張機能。
