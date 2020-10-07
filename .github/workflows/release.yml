@@ -11,9 +11,13 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
+        name: Extract Tag Version
+        id: tag
+        run: echo "::set-output name=version::$(echo ${{ github.ref }} | sed -e 's/^refs\/tags\///')"
+      -
         name: Output File Name
         id: filename
-        run: echo "::set-output name=vsix::freestylewiki-extension_$(echo ${{ github.ref }} | sed -e 's/^v//').vsix"
+        run: echo "::set-output name=vsix::freestylewiki-extension_$(echo ${{ steps.tag.outputs.version }} | sed -e 's/^v//').vsix"
       -
         name: Install Node.js
         uses: actions/setup-node@v1
