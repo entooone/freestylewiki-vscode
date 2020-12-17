@@ -20,6 +20,30 @@ https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-exten
 - シンタックスハイライトの追加
 - アウトラインの追加
 
+## 開発方法
+
+### VSCode でプロジェクトを開く
+
+```
+cd freestylewiki-vscode
+code .
+```
+
+### npm install
+
+```
+npm install
+```
+
+### 実行
+
+```
+npm run compile
+```
+
+- `F5` でデバッグを開始します
+
+
 ## 参考
 
 - [FreeStyleWiki 入門2](http://sumidagawa-shimizu.com/jugyo/wiki/wiki.cgi/teacher/GuideFSW?page=FreeStyleWiki+%C6%FE%CC%E72)
