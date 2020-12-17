@@ -25,6 +25,10 @@ jobs:
           node-version: 10.x
       - 
         run: npm install
+      -
+        run: npm run lint
+      - 
+        run: npm run compile
       - 
         name: Create .vsce Package
         run: npx vsce package -o ${{ steps.filename.outputs.vsix }}
