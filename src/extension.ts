@@ -32,6 +32,9 @@ class FSWDocumentsSymbolProvider {
         const text = document.getText();
         const matchedList = this.matchAll(text);
         const symbols: vscode.DocumentSymbol[] = [];
+        let h1: vscode.DocumentSymbol | null = null;
+        let h2: vscode.DocumentSymbol | null = null;
+        let h3: vscode.DocumentSymbol | null = null;
         matchedList.map((matched) => {
             const type = matched[1];
             const name = matched[2];
@@ -39,22 +42,38 @@ class FSWDocumentsSymbolProvider {
             const pos = document.positionAt(matched.index || 0);
             const line = document.lineAt(pos.line);
             const symbol = new vscode.DocumentSymbol(
-                name,
-                'L' + (pos.line + 1),
+                `${type} ${name}`,
+                `L${pos.line + 1}`,
                 kind,
                 line.range,
                 line.range
             );
             symbol.children = [];
-            if (type == "!!!") {
-                symbols.push(symbol);
-            } else if (type == "!!") {
-                const parent = symbols[symbols.length - 1];
-                parent.children.push(symbol);
-            } else if (type == "!") {
-                let parent = symbols[symbols.length - 1];
-                parent = parent.children[parent.children.length - 1];
-                parent.children.push(symbol);
+            switch (type) {
+                case "!!!":
+                    h1 = symbol;
+                    symbols.push(h1);
+                    break;
+                case "!!":
+                    h2 = symbol;
+                    if (h1 !== null) {
+                        h1.children.push(h2);
+                    } else {
+                        symbols.push(h2);
+                    }
+                    break;
+                case "!":
+                    h3 = symbol;
+                    if (h1 !== null && h2 !== null) {
+                        const parent = h1.range.start.line > h2.range.start.line ? h1 : h2;
+                        parent.children.push(h3);
+                    } else if (h1 !== null) {
+                        h1.children.push(h3);
+                    } else if (h2 !== null) {
+                        h2.children.push(h3);
+                    } else {
+                        symbols.push(h3);
+                    }
             }
         });
 
