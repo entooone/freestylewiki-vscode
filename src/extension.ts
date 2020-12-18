@@ -16,7 +16,7 @@ import * as vscode from 'vscode';
 
 class FSWDocumentsSymbolProvider {
     private readonly pattern = /(^!{1,3}) *(.+)$/gm
-    private readonly tokenKind = 19
+    private readonly tokenKind = 14
 
     private matchAll(text: string): RegExpExecArray[] {
         const out: RegExpExecArray[] = [];
