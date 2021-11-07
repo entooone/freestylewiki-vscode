@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.5.0 - 2021/11/07
+
+- フォーマッタ機能の追加 [#17](https://github.com/entooone/freestylewiki-vscode/pull/17)
+
 ## 0.4.0 - 2020/12/19
 
 - アウトラインがクラッシュしないように修正 [#12](https://github.com/entooone/freestylewiki-vscode/pull/12)
