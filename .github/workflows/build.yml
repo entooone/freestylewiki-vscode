@@ -6,6 +6,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         node: ['10.x']
+        go: ['1.15']
     runs-on: ${{ matrix.os }}
     steps:
       -
@@ -17,11 +18,40 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - 
+        name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+      - 
         run: npm install
       -
         run: npm run lint
       - 
+        name: Copy wasm_exec.js
+        if: matrix.os != 'windows-latest'
+        run: cp $(go env GOROOT)/misc/wasm/wasm_exec.js ./src
+      - 
+        name: Copy wasm_exec.js (Windows)
+        if: matrix.os == 'windows-latest'
+        run: $src=[string]::Format('{0}\misc\wasm\wasm_exec.js', (go env GOROOT)); cp -Path $src -Destination .\src
+      -
+        name: Build Wasm file
+        run: |
+          go build -o ../../static/wasm.wasm
+        working-directory: ./lib/wasm
+        env:
+          GOOS: js
+          GOARCH: wasm
+      - 
         run: npm run compile
       - 
         name: Create .vsce Package
-        run: npm run build
+        run: npx vsce package -o freestylewiki-extension.vsix
+      - 
+        name: 'Upload Artifact'
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v2
+        with:
+          name: freestylewiki-extension.vsix
+          path: freestylewiki-extension.vsix
+          retention-days: 5
