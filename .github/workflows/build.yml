@@ -6,6 +6,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         node: ['10.x']
+        go: ['1.15']
     runs-on: ${{ matrix.os }}
     steps:
       -
@@ -17,9 +18,19 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - 
+        name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+      - 
         run: npm install
       -
         run: npm run lint
+      - name: Copy wasm_exec.js
+        run: cp  $(go env GOROOT)/misc/wasm/wasm_exec.js ./src
+      -
+        name: Build Wasm file
+        run: (cd ./lib/wasm; GOOS=js GOARCH=wasm go build -o ../../static/wasm.wasm)
       - 
         run: npm run compile
       - 
