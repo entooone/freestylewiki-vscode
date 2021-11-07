@@ -38,7 +38,7 @@ jobs:
         name: Build Wasm file
         run: |
           cd ./lib/wasm
-          GOOS=js GOARCH=wasm go build -o ../../static/wasm.wasm)
+          GOOS=js GOARCH=wasm go build -o ../../static/wasm.wasm
           cd ../..
       - 
         run: npm run compile
