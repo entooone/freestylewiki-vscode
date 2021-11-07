@@ -46,4 +46,12 @@ jobs:
         run: npm run compile
       - 
         name: Create .vsce Package
-        run: npm run build
+        run: npx vsce package -o freestylewiki-extension.vsix
+      - 
+        name: 'Upload Artifact'
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v2
+        with:
+          name: freestylewiki-extension.vsix
+          path: freestylewiki-extension.vsix
+          retention-days: 5
