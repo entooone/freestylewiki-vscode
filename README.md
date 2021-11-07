@@ -19,6 +19,7 @@ https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-exten
 
 - シンタックスハイライトの追加
 - アウトラインの追加
+- フォーマッター
 
 ## 開発方法
 
