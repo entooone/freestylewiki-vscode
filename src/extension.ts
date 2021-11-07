@@ -23,7 +23,7 @@ declare const Go: any;
 declare const GoFSWiki: any;
 
 const go = new Go();
-let mod: any, inst: any
+let mod: any, inst: any;
 
 async function loadGOWasm(extensionUri: vscode.Uri) {
 	const wasmPath = vscode.Uri.joinPath(extensionUri, 'static', 'wasm.wasm').fsPath;
