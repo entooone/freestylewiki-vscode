@@ -35,6 +35,13 @@ code .
 npm install
 ```
 
+### Wasm ファイルのセットアップ
+
+```
+cp  $(go env GOROOT)/misc/wasm/wasm_exec.js  ./src/
+(cd ./lib/wasm && GOOS=js GOARCH=wasm go build  -o ../../static/wasm.wasm)
+```
+
 ### 実行
 
 ```
