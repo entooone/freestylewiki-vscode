@@ -26,12 +26,14 @@ jobs:
         run: npm install
       -
         run: npm run lint
-      - name: Copy wasm_exec.js
+      - 
+        name: Copy wasm_exec.js
         if: matrix.os != 'windows-latest'
-          run: cp  $(go env GOROOT)/misc/wasm/wasm_exec.js ./src
-      - name: Copy wasm_exec.js (Windows)
+        run: cp $(go env GOROOT)/misc/wasm/wasm_exec.js ./src
+      - 
+        name: Copy wasm_exec.js (Windows)
         if: matrix.os == 'windows-latest'
-          run: $src=[string]::Format('{0}\misc\wasm\wasm_exec.js', (go env GOROOT)); cp -Path $src -Destination .\src
+        run: $src=[string]::Format('{0}\misc\wasm\wasm_exec.js', (go env GOROOT)); cp -Path $src -Destination .\src
       -
         name: Build Wasm file
         run: (cd ./lib/wasm; GOOS=js GOARCH=wasm go build -o ../../static/wasm.wasm)
