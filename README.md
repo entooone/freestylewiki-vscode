@@ -2,13 +2,18 @@
 
 [![release](https://img.shields.io/github/workflow/status/entooone/freestylewiki-vscode/release?label=release&logo=github)](https://github.com/entooone/freestylewiki-vscode/actions?query=workflow%3Arelease)
 [![version](https://img.shields.io/vscode-marketplace/v/entooone.freestylewiki-extension.svg?style=flat&logo=visual%20studio%20code&label=vscode%20marketplace)](https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-extension)
-[![devDependencies](https://img.shields.io/david/dev/entooone/freestylewiki-vscode?label=devDependencies&logo=node.js&logoColor=white)](https://david-dm.org/entooone/freestylewiki-vscode?type=dev)
 
-[FreeStyleWiki](https://fswiki.osdn.jp/cgi-bin/wiki.cgi) 用の VSCode 拡張機能。
+[FreeStyleWiki](https://fswiki.osdn.jp/cgi-bin/wiki.cgi) 用の VS Code 拡張機能。
 
 ## インストール
 
-https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-extension
+[Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-extension) からインストールができます。
+
+また、VS Code のコマンドパレットで以下を実行することでもインストールできます。
+
+```
+ext install entooone.freestylewiki-extension
+```
 
 ## サポートする拡張子
 
@@ -17,39 +22,47 @@ https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-exten
 
 ## 機能
 
-- シンタックスハイライトの追加
-- アウトラインの追加
+FreeStyleWiki 形式のファイルに以下の機能が追加されます。
+
+- シンタックスハイライト
 - フォーマッター
+- アウトライン
 
 ## 開発方法
 
-### VSCode でプロジェクトを開く
+1. このレポジトリをクローンして VS Code で開きます
 
 ```
+git clone https://github.com/entooone/freestylewiki-vscode.git
 cd freestylewiki-vscode
 code .
 ```
 
-### npm install
+2. `npm install` で依存環境をインストールします
 
 ```
 npm install
 ```
 
-### Wasm ファイルのセットアップ
+3. Go 言語の Wasm の実行に必要なファイルをコピーします
 
 ```
 cp  $(go env GOROOT)/misc/wasm/wasm_exec.js  ./src/
+```
+
+4. `./lib` 以下の Go 言語のプログラムを Wasm にコンパイルします
+
+```
 (cd ./lib/wasm && GOOS=js GOARCH=wasm go build  -o ../../static/wasm.wasm)
 ```
 
-### 実行
+5. TypeScript のプログラムをコンパイルします
 
 ```
 npm run compile
 ```
 
-- `F5` でデバッグを開始します
+6. `F5` でデバック実行します
 
 
 ## 参考
