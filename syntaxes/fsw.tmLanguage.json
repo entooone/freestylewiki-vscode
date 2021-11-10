@@ -121,6 +121,12 @@
 					"include": "#underline"
 				},
 				{
+					"include": "#interwiki"
+				},
+				{
+					"include": "#link"
+				},
+				{
 					"include": "#inline_plugin"
 				}
 			],
@@ -141,6 +147,39 @@
 					"name": "markup.underline.fsw",
 					"match": "__[^_]+__"
 				}, 
+				"interwiki": {
+					"name": "markup.interwiki.fsw",
+					"match": "(\\[\\[)([^\\[\\]|]+?)(\\]\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.link.markdown.fsw"
+						},
+						"2": {
+							"name": "string.other.link.description.markdown.fsw"
+						},
+						"3": {
+							"name": "punctuation.definition.link.markdown.fsw"
+						}
+					}
+				},
+				"link": {
+					"name": "markup.link.fsw",
+					"match": "(\\[)([^\\[\\]\\|]+?)\\|([^\\[\\]]+?)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.link.markdown.fsw"
+						},
+						"2": {
+							"name": "string.other.link.description.markdown.fsw"
+						},
+						"3": {
+							"name": "markup.underline.link.image.markdown.fsw"
+						},
+						"4": {
+							"name": "punctuation.definition.link.markdown.fsw"
+						}
+					}
+				},
 				"inline_plugin": {
 					"name": "markup.plugin.fsw",
 					"match": "({{[^ {}]+)[^{}]*(}})",
