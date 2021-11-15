@@ -7,7 +7,7 @@
     },
     "publisher": "entooone",
     "license": "SEE LICENSE IN LICENSE",
-    "version": "0.5.5",
+    "version": "0.5.6",
     "icon": "images/icon.png",
     "engines": {
         "vscode": "^1.41.0"
