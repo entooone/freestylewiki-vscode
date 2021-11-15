@@ -2,7 +2,7 @@ module wasm
 
 go 1.17
 
-require github.com/entooone/go-fswiki v0.1.3
+require github.com/entooone/go-fswiki v0.1.4
 
 require (
 	github.com/mattn/go-runewidth v0.0.13 // indirect
