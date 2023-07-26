@@ -44,25 +44,19 @@ code .
 npm install
 ```
 
-3. Go 言語の Wasm の実行に必要なファイルをコピーします
-
-```
-cp  $(go env GOROOT)/misc/wasm/wasm_exec.js  ./src/
-```
-
-4. `./lib` 以下の Go 言語のプログラムを Wasm にコンパイルします
+3. `./lib` 以下の Go 言語のプログラムを Wasm にコンパイルします
 
 ```
 (cd ./lib/wasm && GOOS=js GOARCH=wasm go build  -o ../../static/wasm.wasm)
 ```
 
-5. TypeScript のプログラムをコンパイルします
+4. TypeScript のプログラムをコンパイルします
 
 ```
 npm run compile
 ```
 
-6. `F5` でデバック実行します
+5. `F5` でデバック実行します
 
 ## 参考
 
