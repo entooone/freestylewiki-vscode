@@ -1,6 +1,6 @@
 # FreeStyleWiki for Visual Studio Code
 
-[![release](https://img.shields.io/github/actions/workflow/status/entooone/freestylewiki-vscode/release.yml?label=release)](https://github.com/entooone/freestylewiki-vscode/actions?query=workflow%3Arelease)
+[![release](https://img.shields.io/github/actions/workflow/status/entooone/freestylewiki-vscode/release.yaml?label=release)](https://github.com/entooone/freestylewiki-vscode/actions?query=workflow%3Arelease)
 [![version](https://img.shields.io/vscode-marketplace/v/entooone.freestylewiki-extension.svg?style=flat&logo=visual%20studio%20code&label=vscode%20marketplace)](https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-extension)
 
 [FreeStyleWiki](https://fswiki.osdn.jp/cgi-bin/wiki.cgi) 用の VS Code 拡張機能。
