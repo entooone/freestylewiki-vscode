@@ -132,13 +132,12 @@ class FSWFoldingRangeProvider implements vscode.FoldingRangeProvider {
 		let ranges: vscode.FoldingRange[] = [];
 		let startLines: (number | undefined)[] = [];
 
-		// Patterns
 		const patterns = [
-			{ regex: /^!!!.+/gm, level: 1 },
-			{ regex: /^!![^!].+/gm, level: 2 },
-			{ regex: /^![^!].+/gm, level: 3 },
-			{ regex: /^{{[^}]+$/gm, level: -1, isBlockStart: true },
-			{ regex: /^}}$/gm, level: -1, isBlockEnd: true }
+			{ regex: /^!!!.+/gm, level: 1 }, // H1
+			{ regex: /^!![^!].+/gm, level: 2 }, // H2
+			{ regex: /^![^!].+/gm, level: 3 }, // H3
+			{ regex: /^{{[^}]+$/gm, level: -1, isBlockStart: true }, // Block start
+			{ regex: /^}}$/gm, level: -1, isBlockEnd: true } // Block end
 		]
 		const maxLevel = Math.max(...patterns.map(p => p.level));
 
