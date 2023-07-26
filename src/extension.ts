@@ -44,67 +44,51 @@ async function formatDocument(s: string): Promise<string> {
 }
 
 class FSWDocumentsSymbolProvider implements vscode.DocumentSymbolProvider {
-	private readonly pattern = /(^!{1,3}) *(.+)$/gm;
-	private readonly tokenKind = 14;
-
-	private matchAll(text: string): RegExpExecArray[] {
-		const out: RegExpExecArray[] = [];
-		this.pattern.lastIndex = 0;
-		let match: RegExpExecArray | null = null;
-		while ((match = this.pattern.exec(text))) {
-			out.push(match);
-		}
-		return out;
-	}
-
 	public provideDocumentSymbols(document: vscode.TextDocument, _token: vscode.CancellationToken): vscode.DocumentSymbol[] {
-		const text = document.getText();
-		const matchedList = this.matchAll(text);
-		const symbols: vscode.DocumentSymbol[] = [];
-		let h1: vscode.DocumentSymbol | null = null;
-		let h2: vscode.DocumentSymbol | null = null;
-		let h3: vscode.DocumentSymbol | null = null;
-		matchedList.map((matched) => {
-			const type = matched[1];
-			const name = matched[2];
-			const kind = this.tokenKind;
-			const pos = document.positionAt(matched.index || 0);
-			const line = document.lineAt(pos.line);
-			const symbol = new vscode.DocumentSymbol(
-				`${type} ${name}`,
-				`L${pos.line + 1}`,
-				kind,
-				line.range,
-				line.range
-			);
-			symbol.children = [];
-			switch (type) {
-				case "!!!":
-					h1 = symbol;
-					symbols.push(h1);
-					break;
-				case "!!":
-					h2 = symbol;
-					if (h1 !== null) {
-						h1.children.push(h2);
-					} else {
-						symbols.push(h2);
+		let symbols: vscode.DocumentSymbol[] = [];
+		let isInBlock = false;
+		const kind = 14;
+
+		const patterns = [
+			{ regex: /^!!!.+/gm, level: 1 }, // H1
+			{ regex: /^!![^!].+/gm, level: 2 }, // H2
+			{ regex: /^![^!].+/gm, level: 3 }, // H3
+			{ regex: /^{{[^}]+$/gm, level: -1, isBlockStart: true }, // Block start
+			{ regex: /^}}$/gm, level: -1, isBlockEnd: true } // Block end
+		]
+
+		let headings: vscode.DocumentSymbol[] = [];
+
+		for (let i = 0; i < document.lineCount; i++) {
+			const line = document.lineAt(i);
+
+			for (const pattern of patterns) {
+				if (line.text.match(pattern.regex)) {
+					if (pattern.isBlockStart) {
+						isInBlock = true;
+					} else if (pattern.isBlockEnd) {
+						isInBlock = false;
+					} else if (!isInBlock) {
+						const symbol = new vscode.DocumentSymbol(
+							line.text.trim(),
+							`L${i + 1}`,
+							kind,
+							line.range,
+							line.range,
+						);
+
+						headings[pattern.level] = symbol;
+						const hs = headings.filter((h, i) => i < pattern.level && h !== undefined).sort((a, b) => b.range.start.line - a.range.start.line);
+						if (hs.length > 0) {
+							hs[0].children.push(symbol);
+						} else {
+							symbols.push(symbol);
+						}
 					}
-					break;
-				case "!":
-					h3 = symbol;
-					if (h1 !== null && h2 !== null) {
-						const parent = h1.range.start.line > h2.range.start.line ? h1 : h2;
-						parent.children.push(h3);
-					} else if (h1 !== null) {
-						h1.children.push(h3);
-					} else if (h2 !== null) {
-						h2.children.push(h3);
-					} else {
-						symbols.push(h3);
-					}
+				}
 			}
-		});
+		}
+
 		return symbols;
 	}
 }
