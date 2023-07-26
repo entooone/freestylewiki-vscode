@@ -15,6 +15,9 @@
 			"include": "#plugin"
 		},
 		{
+			"include": "#comment"
+		},
+		{
 			"include": "#inline"
 		}
 	],
@@ -103,6 +106,15 @@
 			"endCaptures": {
 				"1": {
 					"name": "entity.name.tag.fsw"
+				}
+			}
+		},
+		"comment": {
+			"name": "comment.line.fsw",
+			"match": "(?:^|\\G)(//.*)$",
+			"captures": {
+				"1": {
+					"name": "comment.line.double-slash.fsw"
 				}
 			}
 		},
