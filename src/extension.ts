@@ -45,7 +45,7 @@ async function formatDocument(s: string): Promise<string> {
 
 class FSWDocumentsSymbolProvider implements vscode.DocumentSymbolProvider {
 	public provideDocumentSymbols(document: vscode.TextDocument, _token: vscode.CancellationToken): vscode.DocumentSymbol[] {
-		let symbols: vscode.DocumentSymbol[] = [];
+		const symbols: vscode.DocumentSymbol[] = [];
 		let isInBlock = false;
 		const kind = 14;
 
@@ -55,9 +55,9 @@ class FSWDocumentsSymbolProvider implements vscode.DocumentSymbolProvider {
 			{ regex: /^![^!].+/gm, level: 3 }, // H3
 			{ regex: /^{{[^}]+$/gm, level: -1, isBlockStart: true }, // Block start
 			{ regex: /^}}$/gm, level: -1, isBlockEnd: true } // Block end
-		]
+		];
 
-		let headings: vscode.DocumentSymbol[] = [];
+		const headings: vscode.DocumentSymbol[] = [];
 
 		for (let i = 0; i < document.lineCount; i++) {
 			const line = document.lineAt(i);
@@ -113,8 +113,8 @@ class FSWDocumentFormatter implements vscode.DocumentFormattingEditProvider {
 
 class FSWFoldingRangeProvider implements vscode.FoldingRangeProvider {
 	public provideFoldingRanges(document: vscode.TextDocument, _context: vscode.FoldingContext, _token: vscode.CancellationToken): vscode.FoldingRange[] {
-		let ranges: vscode.FoldingRange[] = [];
-		let startLines: (number | undefined)[] = [];
+		const ranges: vscode.FoldingRange[] = [];
+		const startLines: (number | undefined)[] = [];
 
 		const patterns = [
 			{ regex: /^!!!.+/gm, level: 1 }, // H1
@@ -122,7 +122,7 @@ class FSWFoldingRangeProvider implements vscode.FoldingRangeProvider {
 			{ regex: /^![^!].+/gm, level: 3 }, // H3
 			{ regex: /^{{[^}]+$/gm, level: -1, isBlockStart: true }, // Block start
 			{ regex: /^}}$/gm, level: -1, isBlockEnd: true } // Block end
-		]
+		];
 		const maxLevel = Math.max(...patterns.map(p => p.level));
 
 		for (let i = 0; i < document.lineCount; i++) {
