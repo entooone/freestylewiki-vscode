@@ -127,6 +127,62 @@ class FSWDocumentFormatter implements vscode.DocumentFormattingEditProvider {
 	}
 }
 
+class FSWFoldingRangeProvider implements vscode.FoldingRangeProvider {
+	public provideFoldingRanges(document: vscode.TextDocument, _context: vscode.FoldingContext, _token: vscode.CancellationToken): vscode.FoldingRange[] {
+		let ranges: vscode.FoldingRange[] = [];
+		let startLines: (number | undefined)[] = [];
+
+		// Patterns
+		const patterns = [
+			{ regex: /^!!!.+/gm, level: 1 },
+			{ regex: /^!![^!].+/gm, level: 2 },
+			{ regex: /^![^!].+/gm, level: 3 },
+			{ regex: /^{{[^}]+$/gm, level: -1, isBlockStart: true },
+			{ regex: /^}}$/gm, level: -1, isBlockEnd: true }
+		]
+		const maxLevel = Math.max(...patterns.map(p => p.level));
+
+		for (let i = 0; i < document.lineCount; i++) {
+			const line = document.lineAt(i);
+
+			for (const pattern of patterns) {
+				if (line.text.match(pattern.regex)) {
+					const startLine = startLines[pattern.level];
+					if (pattern.isBlockStart) {
+						startLines[pattern.level] = i;
+					} else if (pattern.isBlockEnd) {
+						if (startLine !== undefined) {
+							ranges.push(new vscode.FoldingRange(startLine, i));
+							startLines[pattern.level] = undefined;
+						}
+					} else if (startLines[-1] === undefined) { // not in block
+						if (startLine !== undefined) {
+							ranges.push(new vscode.FoldingRange(startLine, i - 1));
+						}
+						startLines[pattern.level] = i;
+						for (let j = pattern.level + 1; j <= maxLevel; j++) {
+							const highLevelStartLine = startLines[j];
+							if (highLevelStartLine !== undefined) {
+								ranges.push(new vscode.FoldingRange(highLevelStartLine, i - 1));
+								startLines[j] = undefined;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		for (let i = 0; i < startLines.length; i++) {
+			const startLine = startLines[i];
+			if (startLine !== undefined) {
+				ranges.push(new vscode.FoldingRange(startLine, document.lineCount - 1));
+			}
+		}
+
+		return ranges;
+	}
+}
+
 export async function activate(context: vscode.ExtensionContext) {
 	const fswSelector = [
 		{ language: 'fsw', pattern: '**/*.fsw' },
@@ -143,5 +199,10 @@ export async function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.languages.registerDocumentFormattingEditProvider(
 			fswSelector, new FSWDocumentFormatter())
+	);
+	context.subscriptions.push(
+		vscode.languages.registerFoldingRangeProvider(
+			fswSelector, new FSWFoldingRangeProvider(),
+		)
 	);
 }
