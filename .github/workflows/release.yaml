@@ -32,6 +32,10 @@ jobs:
           cache-dependency-path: ./lib/wasm/go.sum
           check-latest: true
           cache: true
+      - 
+        name: Copy wasm_exec.js
+        run: |
+          cp $(go env GOROOT)/misc/wasm/wasm_exec.js ./src
       -
         name: Build Wasm file
         run: |
