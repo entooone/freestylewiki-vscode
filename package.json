@@ -7,10 +7,10 @@
     },
     "publisher": "entooone",
     "license": "SEE LICENSE IN LICENSE",
-    "version": "0.5.6",
+    "version": "0.6.0",
     "icon": "images/icon.png",
     "engines": {
-        "vscode": "^1.41.0"
+        "vscode": "^1.67.0"
     },
     "repository": {
         "type": "git",
@@ -55,13 +55,12 @@
     },
     "main": "./out/extension.js",
     "devDependencies": {
-        "@types/node": "^15.12.2",
-        "@types/vscode": "^1.41.0",
-        "@typescript-eslint/eslint-plugin": "^4.26.1",
-        "@typescript-eslint/parser": "^4.26.1",
-        "eslint": "^7.28.0",
-        "typescript": "^4.3.2",
-        "vsce": "^2.6.0",
-        "vscode-test": "^1.5.2"
+        "@types/node": "^15.14.9",
+        "@types/vscode": "^1.67.0",
+        "@typescript-eslint/eslint-plugin": "^4.33.0",
+        "@typescript-eslint/parser": "^4.33.0",
+        "eslint": "^7.32.0",
+        "typescript": "^4.9.5",
+        "@vscode/vsce": "^2.19.0"
     }
 }
