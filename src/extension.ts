@@ -110,7 +110,7 @@ class FSWDocumentsSymbolProvider implements vscode.DocumentSymbolProvider {
 }
 
 class FSWDocumentFormatter implements vscode.DocumentFormattingEditProvider {
-	public provideDocumentFormattingEdits(document: vscode.TextDocument): Thenable<vscode.TextEdit[]> {
+	public provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.ProviderResult<vscode.TextEdit[]> {
 		return new Promise<vscode.TextEdit[]>((resolve, rejects) => {
 			formatDocument(document.getText()).then(result => {
 				const fileStart = new vscode.Position(0, 0);
