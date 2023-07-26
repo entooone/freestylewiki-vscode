@@ -14,6 +14,7 @@
 
 import { rejects } from 'assert';
 import { resolve } from 'path/posix';
+import "./polyfill/crypto";
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import "./wasm_exec";
