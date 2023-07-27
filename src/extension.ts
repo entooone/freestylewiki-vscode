@@ -112,6 +112,16 @@ class FSWDocumentFormatter implements vscode.DocumentFormattingEditProvider {
 }
 
 class FSWFoldingRangeProvider implements vscode.FoldingRangeProvider {
+	private pushHeadingFoldingRange(document: vscode.TextDocument, ranges: vscode.FoldingRange[], startLine: number, endLine: number) {
+		const blankLinePattern = /^\s*$/gm;
+		let end = endLine;
+		// 最終行が空行の場合は、最終行を含めない
+		if (end - 1 >= 0 && document.lineAt(endLine).text.match(blankLinePattern)) {
+			end -= 1;
+		}
+		ranges.push(new vscode.FoldingRange(startLine, end));
+	}
+
 	public provideFoldingRanges(document: vscode.TextDocument, _context: vscode.FoldingContext, _token: vscode.CancellationToken): vscode.FoldingRange[] {
 		const ranges: vscode.FoldingRange[] = [];
 		const startLines: (number | undefined)[] = [];
@@ -123,6 +133,7 @@ class FSWFoldingRangeProvider implements vscode.FoldingRangeProvider {
 			{ regex: /^{{[^}]+$/gm, level: -1, isBlockStart: true }, // Block start
 			{ regex: /^}}$/gm, level: -1, isBlockEnd: true } // Block end
 		];
+		const blankLinePattern = /^\s*$/gm;
 		const maxLevel = Math.max(...patterns.map(p => p.level));
 
 		for (let i = 0; i < document.lineCount; i++) {
@@ -140,13 +151,13 @@ class FSWFoldingRangeProvider implements vscode.FoldingRangeProvider {
 						}
 					} else if (startLines[-1] === undefined) { // not in block
 						if (startLine !== undefined) {
-							ranges.push(new vscode.FoldingRange(startLine, i - 1));
+							this.pushHeadingFoldingRange(document, ranges, startLine, i - 1);
 						}
 						startLines[pattern.level] = i;
 						for (let j = pattern.level + 1; j <= maxLevel; j++) {
 							const highLevelStartLine = startLines[j];
 							if (highLevelStartLine !== undefined) {
-								ranges.push(new vscode.FoldingRange(highLevelStartLine, i - 1));
+								this.pushHeadingFoldingRange(document, ranges, highLevelStartLine, i - 1);
 								startLines[j] = undefined;
 							}
 						}
@@ -158,7 +169,7 @@ class FSWFoldingRangeProvider implements vscode.FoldingRangeProvider {
 		for (let i = 0; i < startLines.length; i++) {
 			const startLine = startLines[i];
 			if (startLine !== undefined) {
-				ranges.push(new vscode.FoldingRange(startLine, document.lineCount - 1));
+				this.pushHeadingFoldingRange(document, ranges, startLine, document.lineCount - 1);
 			}
 		}
 
