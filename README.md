@@ -5,6 +5,8 @@
 
 [FreeStyleWiki](https://fswiki.osdn.jp/cgi-bin/wiki.cgi) 用の VS Code 拡張機能。
 
+[![screenshot](https://raw.githubusercontent.com/entooone/freestylewiki-vscode/master/images/screenshot.jpeg)](https://raw.githubusercontent.com/entooone/freestylewiki-vscode/master/images/screenshot.jpeg)
+
 ## インストール
 
 [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=entooone.freestylewiki-extension) からインストールができます。
