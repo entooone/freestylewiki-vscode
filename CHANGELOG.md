@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.7.0 - 2023/07/27
+
+- 見出しを折りたたむとき最終行が空行なら残すように修正 [77c9942](https://github.com/entooone/freestylewiki-vscode/commit/77c99421bcaacc88c4d6c290807329217ae4d478)
+
 ## 0.6.0 - 2023/07/27
 
 - コメントアウトのシンタックスハイライトの追加 [60b7537](https://github.com/entooone/freestylewiki-vscode/commit/60b75377207cc4a6b4e58cba9613c078d205e7a9)
