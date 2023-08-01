@@ -53,7 +53,7 @@
                         "right"
                     ],
                     "default": "left",
-                    "description": "テーブルの整形における文字の揃え方をしていします"
+                    "description": "テーブルの整形における文字の揃え方を設定します。"
                 },
                 "freeStyleWiki.formatTableCellSuffixSpace": {
                     "type": "boolean",
