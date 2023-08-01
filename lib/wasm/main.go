@@ -1,14 +1,35 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	"strings"
 	"syscall/js"
 
 	"github.com/entooone/go-fswiki"
 )
 
-func formatDocument(s string) string {
-	out, err := fswiki.FormatDocument(strings.NewReader(s))
+func parseOption(option js.Value) fswiki.FormatOption {
+	foption := fswiki.FormatOption{}
+
+	align := option.Get("formatTableAlignOption").String()
+	switch align {
+	case "left":
+		foption.TableAlign = fswiki.TableAlignLeft
+	case "right":
+		foption.TableAlign = fswiki.TableAlignRight
+	default:
+		fmt.Fprintf(os.Stderr, "invalid formatTableAlignOption: %s\n", align)
+		foption.TableAlign = fswiki.TableAlignLeft
+	}
+
+	foption.TableInsertSpaceToEndOfCell = option.Get("formatTableCellSuffixSpace").Bool()
+
+	return foption
+}
+
+func formatDocument(s string, option fswiki.FormatOption) string {
+	out, err := fswiki.FormatDocumentWithOption(strings.NewReader(s), option)
 	if err != nil {
 		return s
 	}
@@ -24,7 +45,9 @@ func main() {
 			}
 
 			s := args[0].String()
-			return formatDocument(s)
+			option := parseOption(args[1])
+
+			return formatDocument(s, option)
 		}),
 	}))
 	<-ch

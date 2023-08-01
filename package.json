@@ -41,7 +41,27 @@
                 "scopeName": "source.fsw",
                 "path": "./syntaxes/fsw.tmLanguage.json"
             }
-        ]
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "FreeStyleWiki",
+            "properties": {
+                "freeStyleWiki.formatTableAlignOption": {
+                    "type": "string",
+                    "enum": [
+                        "left",
+                        "right"
+                    ],
+                    "default": "left",
+                    "description": "テーブルの整形における文字の揃え方を選択してください。"
+                },
+                "freeStyleWiki.formatTableCellSuffixSpace": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "テーブルの整形時、各セルの末尾にスペースを追加するかどうかを設定します。"
+                }
+            }
+        }
     },
     "activationEvents": [
         "onLanguage:fsw"

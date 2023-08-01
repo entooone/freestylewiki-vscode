@@ -34,12 +34,17 @@ async function loadGOWasm(extensionUri: vscode.Uri) {
 }
 
 async function formatDocument(s: string): Promise<string> {
+	const config = vscode.workspace.getConfiguration('freeStyleWiki');
+	const option = {
+		formatTableAlignOption: config.get<string>('formatTableAlignOption'),
+		formatTableCellSuffixSpace: config.get<boolean>('formatTableCellSuffixSpace'),
+	};
 	try {
-		return GoFSWiki.formatDocument(s);
+		return GoFSWiki.formatDocument(s, option);
 	} catch (e) {
 		inst = await WebAssembly.instantiate(mod, go.importObject);
 		go.run(inst);
-		return GoFSWiki.formatDocument(s);
+		return GoFSWiki.formatDocument(s, option);
 	}
 }
 
