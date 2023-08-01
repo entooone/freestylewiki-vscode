@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.8.1 - 2023/08/01
+
+- テーブルの左寄せをした際に末尾スペースを挿入しないように修正 [#23](https://github.com/entooone/freestylewiki-vscode/issues/23) [28b9be0](https://github.com/entooone/freestylewiki-vscode/commit/28b9be06baca1f587d11d746169206f03fcabe72) 
+
 ## 0.8.0 - 2023/08/01
 
 - テーブル整形に関するオプションの追加 [55e6597](https://github.com/entooone/freestylewiki-vscode/commit/55e659763c119ddb339e1f95e0809ffb56102f3e)
