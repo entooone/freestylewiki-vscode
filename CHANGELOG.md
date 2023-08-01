@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.8.0 - 2023/08/01
+
+- テーブル整形に関するオプションの追加 [55e6597](https://github.com/entooone/freestylewiki-vscode/commit/55e659763c119ddb339e1f95e0809ffb56102f3e)
+    - `freeStyleWiki.formatTableAlignOption`: テーブルの整形における文字の揃え方をしていします。
+    - `freeStyleWiki.formatTableCellSuffixSpace`: テーブルの整形時、各セルの末尾にスペースを追加するかどうかを設定します。
+- テーブル整形のデフォルト値を変更
+    - `freeStyleWiki.formatTableAlignOption`: `right` から `left` に変更
+    - `freeStyleWiki.formatTableCellSuffixSpace`: `false` から `true` に変更
+
 ## 0.7.0 - 2023/07/27
 
 - 見出しを折りたたむとき最終行が空行なら残すように修正 [77c9942](https://github.com/entooone/freestylewiki-vscode/commit/77c99421bcaacc88c4d6c290807329217ae4d478)
