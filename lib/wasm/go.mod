@@ -1,6 +1,6 @@
 module wasm
 
-go 1.20
+go 1.24
 
 require github.com/entooone/go-fswiki v0.2.1
 
