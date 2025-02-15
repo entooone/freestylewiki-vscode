@@ -5,11 +5,11 @@ on:
       - 'v[0-9]+.*'
 jobs:
   release:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       -
         name: Clone repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
         name: Extract Tag Version
         id: tag
@@ -20,22 +20,22 @@ jobs:
         run: echo "::set-output name=vsix::freestylewiki-extension_$(echo ${{ steps.tag.outputs.version }} | sed -e 's/^v//').vsix"
       -
         name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "22.x"
           cache: "npm"
-      - 
+      -
         name: Install Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
-          go-version: "1.20"
+          go-version: "1.24"
           cache-dependency-path: ./lib/wasm/go.sum
           check-latest: true
           cache: true
       - 
         name: Copy wasm_exec.js
         run: |
-          cp $(go env GOROOT)/misc/wasm/wasm_exec.js ./src
+          cp $(go env GOROOT)/lib/wasm/wasm_exec.js ./src
       -
         name: Build Wasm file
         run: |
@@ -54,22 +54,8 @@ jobs:
         run: npx vsce package -o ${{ steps.filename.outputs.vsix }}
       - 
         name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v2
         with:
+          name: Release ${{ github.ref }}
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-      -
-        name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./${{ steps.filename.outputs.vsix }}
-          asset_name: ${{ steps.filename.outputs.vsix }}
-          asset_content_type: application/vsix
+          files: ${{ steps.filename.outputs.vsix }}
