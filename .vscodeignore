@@ -10,3 +10,5 @@ test/**
 **/.eslintrc.json
 **/.eslintrc.js
 **/*.svg
+**/biome.json
+**/.gitkeep
