@@ -1,5 +1,5 @@
 {
-    "name": "freestylewiki-extension",
+	    "name": "freestylewiki-extension",
     "displayName": "FreeStyleWiki for Visual Studio Code",
     "description": "FreeStyleWiki support for Vistual Studio Code",
     "author": {
@@ -70,6 +70,7 @@
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
         "lint": "biome lint",
+		"format": "biome format --write",
         "watch": "tsc -w -p ./",
         "build": "vsce package"
     },
