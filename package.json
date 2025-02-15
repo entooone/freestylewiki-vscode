@@ -1,5 +1,5 @@
 {
-	    "name": "freestylewiki-extension",
+	"name": "freestylewiki-extension",
     "displayName": "FreeStyleWiki for Visual Studio Code",
     "description": "FreeStyleWiki support for Vistual Studio Code",
     "author": {
