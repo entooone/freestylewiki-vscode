@@ -69,18 +69,16 @@
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
-        "lint": "eslint . --ext .ts,.tsx",
+        "lint": "biome lint",
         "watch": "tsc -w -p ./",
         "build": "vsce package"
     },
     "main": "./out/extension.js",
     "devDependencies": {
-        "@types/node": "^15.14.9",
-        "@types/vscode": "^1.67.0",
-        "@typescript-eslint/eslint-plugin": "^4.33.0",
-        "@typescript-eslint/parser": "^4.33.0",
-        "@vscode/vsce": "^2.19.0",
-        "eslint": "^7.32.0",
-        "typescript": "^4.9.5"
+        "@biomejs/biome": "1.9.4",
+        "@types/node": "^22.13.4",
+        "@types/vscode": "^1.97.0",
+        "@vscode/vsce": "^3.2.2",
+        "typescript": "^5.7.3"
     }
 }
