@@ -76,7 +76,7 @@
         "@biomejs/biome": "1.9.4",
         "@types/node": "^22.13.4",
         "@types/vscode": "^1.75.0",
-        "@vscode/vsce": "^3.2.2",
+        "@vscode/vsce": "^3.9.2",
         "typescript": "^5.7.3"
     }
 }
